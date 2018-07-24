@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    paixu.cpp
+    paixu.cpp \
+    chazhao.cpp
 
 HEADERS += \
-    paixu.h
+    paixu.h \
+    chazhao.h
