@@ -71,133 +71,17 @@ namespace lh {
 
 
 // 交换数组元素
-static void swap_m(int *arr, int i, int j) {
-    int tp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = tp;
-}
+static void swap_m(int *arr, int i, int j);
 
 // 选择排序
-static void xuanZe(int *arr, int n) {
-#if 0 // 错误
-    int i,j;
-    int index;
-    for(i=0; i<n-1; i++) {
-        for(j=i+1; j<n; j++) {
-            if(arr[i] < arr[j]) {
-                index = j;
-            }
-        }
-        int tp = arr[index];
-        arr[index] = arr[i];
-        arr[i] = tp;
-    }
-#elif 0 // 修改正确
-    int i,j;
-    int index;
-    for(i=0; i<n-1; i++) {
-        // 必须加这句话，不然排序不正确
-        index = i;
-        for(j=i+1; j<n; j++) {
-            if(arr[index] < arr[j]) {
-                index = j;
-            }
-        }
-        swap_m(arr, i, index);
-    }
-#endif
-    // 从大到小
-#if 0 //正确
-    int i,j;
-    for(i=0; i<n-1; i++) {
-        for(j=i+1; j<n; j++) {
-            if(arr[i] < arr[j]) {
-                int tp = arr[j];
-                arr[j] = arr[i];
-                arr[i] = tp;
-            }
-        }
-    }
-#endif
-    // 从大到小 优化方法
-#if 1 //正确
-    int i,j;
-    for(i=0; i<n-1; i++) {
-        int index = i;
-        for(j=i+1; j<n; j++) {
-            if(arr[index] < arr[j]) {
-                index = j;
-            }
-        }
-        //进行交换，如果index发生变化，则进行交换
-        if(index != i) {
-            swap_m(arr, i, index);
-        }
-    }
-#endif
-}
+static void xuanZe(int *arr, int n);
 
 // 冒泡排序
-static void maoPao(int *arr, int n) {
-    //从大到小
-#if 0 //正确
-    int i,j;
-    for(i=0; i<n-1; i++) {
-        for(j=0; j<n-1-i; j++) {
-            if(arr[j] < arr[j+1]) {
-                int tp = arr[j+1];
-                arr[j+1] = arr[j];
-                arr[j] = tp;
-            }
-        }
-    }
-#endif
-    //从小到大
-#if 0 //正确
-    int i,j;
-    for(i=0; i<n-1; i++) {
-        for(j=0; j<n-1-i; j++) {
-            if(arr[j] > arr[j+1]) {
-                swap_m(arr, j, j+1);
-            }
-        }
-    }
-#endif
-
-    // 从小到大 优化方法
-#if 1 //正确
-    int i,j;
-    for(i=0; i<n-1; i++) {
-        bool flag = true; // 设定一个标记，若为true，则表示此次循环没有进行交换，也就是待排序列已经有序，排序已然完成。
-        for(j=0; j<n-1-i; j++) {
-            if(arr[j] > arr[j+1]) {
-                swap_m(arr, j, j+1);
-                flag = false;
-            }
-        }
-        if(flag == true) {
-            std::cout << "order by" << std::endl;
-            break;
-        }
-    }
-#endif
-}
+static void maoPao(int *arr, int n);
 
 
 // 插入排序
-static void chaRu(int *arr, int n) {
-    // 从小到大
-#if 1
-    int i,j;
-    for(i=1; i<n; i++) {
-        j = i;
-        while(j > 0 && arr[j] < arr[j-1]) {
-            swap_m(arr, j, j-1);
-            j--;
-        }
-    }
-#endif
-}
+static void chaRu(int *arr, int n);
 
 
 /**
@@ -225,81 +109,13 @@ static void chaRu(int *arr, int n) {
 */
 // 希尔排序
 // 希尔排序 针对有序序列在插入时采用交换法
-static void xiEr1(int *arr, int n) {
-    //增量gap，并逐步缩小增量
-    for(int gap=n/2;gap>0;gap/=2){
-        //从第gap个元素，逐个对其所在组进行直接插入排序操作
-        for(int i=gap;i<n;i++){
-            int j = i;
-            while(j-gap>=0 && arr[j]<arr[j-gap]){
-                //插入排序采用交换法
-                swap_m(arr,j,j-gap);
-                j-=gap;
-            }
-        }
-    }
-}
+static void xiEr1(int *arr, int n);
 
 // 希尔排序 针对有序序列在插入时采用移动法。
-static void xiEr2(int *arr, int n) {
-    //增量gap，并逐步缩小增量
-    for(int gap=n/2;gap>0;gap/=2){
-        //从第gap个元素，逐个对其所在组进行直接插入排序操作
-        for(int i=gap;i<n;i++){
-            int j = i;
-            int temp = arr[j];
-            if(arr[j]<arr[j-gap]){
-                while(j-gap>=0 && temp<arr[j-gap]){
-                    //移动法
-                    arr[j] = arr[j-gap];
-                    j-=gap;
-                }
-                arr[j] = temp;
-            }
-        }
-    }
-}
+static void xiEr2(int *arr, int n);
 
 // 使用排序方法，检测是否正确
-static void paiXu() {
-    int a[10] = {0,1,2,3,4,5,6,7,8,9};
-    xuanZe(a, 10);
-    for(int i=0; i<10; i++) {
-        std::cout << a[i] << " ";
-    }
-    std::cout << "\n========================" << std::endl;
-
-    int b[10] = {9,8,7,6,5,4,3,2,1,0};
-//    int b[10] = {0,1,2,3,4,5,6,7,8,9};
-    maoPao(b, 10);
-    for(int i=0; i<10; i++) {
-        std::cout << b[i] << " ";
-    }
-    std::cout << "\n========================" << std::endl;
-
-//    int c[10] = {0,1,2,3,4,5,6,7,8,9};
-//    int c[10] = {9,8,7,6,5,4,3,2,1,0};
-    int c[10] = {0,1,12,31,4,15,61,17,18,9};
-    chaRu(c, 10);
-    for(int i=0; i<10; i++) {
-        std::cout << c[i] << " ";
-    }
-    std::cout << "\n========================" << std::endl;
-
-    int d[10] = {0,1,12,31,4,15,61,17,18,9};
-    xiEr1(d, 10);
-    for(int i=0; i<10; i++) {
-        std::cout << d[i] << " ";
-    }
-    std::cout << "\n========================" << std::endl;
-
-    int e[10] = {0,1,12,31,4,15,61,17,18,9};
-    xiEr2(e, 10);
-    for(int i=0; i<10; i++) {
-        std::cout << e[i] << " ";
-    }
-    std::cout << "\n========================" << std::endl;
-}
+extern void paiXu();
 
 /**
 快速排序（Quicksort）是对冒泡排序的一种改进。
@@ -308,44 +124,7 @@ static void paiXu() {
 整个排序过程可以递归进行，以此达到整个数据变成有序序列。
 */
 // 快速排序
-static void kuaiSu(int *a, int left, int right)
-{
-    if(left >= right)/*如果左边索引大于或者等于右边的索引就代表已经整理完成一个组了*/
-    {
-        return ;
-    }
-    int i = left;
-    int j = right;
-    int key = a[left];
-
-    while(i < j)                               /*控制在当组内寻找一遍*/
-    {
-        while(i < j && key <= a[j])
-        /*而寻找结束的条件就是，1，找到一个小于或者大于key的数（大于或小于取决于你想升
-        序还是降序）2，没有符合条件1的，并且i与j的大小没有反转*/
-        {
-            j--;/*向前寻找*/
-        }
-
-        a[i] = a[j];
-        /*找到一个这样的数后就把它赋给前面的被拿走的i的值（如果第一次循环且key是
-        a[left]，那么就是给key）*/
-
-        while(i < j && key >= a[i])
-        /*这是i在当组内向前寻找，同上，不过注意与key的大小关系停止循环和上面相反，
-        因为排序思想是把数往两边扔，所以左右两边的数大小与key的关系相反*/
-        {
-            i++;
-        }
-
-        a[j] = a[i];
-    }
-
-    a[i] = key;/*当在当组内找完一遍以后就把中间数key回归*/
-    kuaiSu(a, left, i - 1);/*最后用同样的方式对分出来的左边的小组进行同上的做法*/
-    kuaiSu(a, i + 1, right);/*用同样的方式对分出来的右边的小组进行同上的做法*/
-                       /*当然最后可能会出现很多分左右，直到每一组的i = j 为止*/
-}
+static void kuaiSu(int *a, int left, int right);
 
 } // end lh
 

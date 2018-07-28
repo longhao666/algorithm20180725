@@ -10,36 +10,36 @@ static void erFen() {
 }
 
 #if 0
-// æ–¹æ³•ä¸€
-static int BinSearch(SeqList *Rï¼Œint n,KeyType K)
+// ·½·¨Ò»
+static int BinSearch(SeqList *R£¬int n,KeyType K)
 {
-    //åœ¨æœ‰åºè¡¨R[0..n-1]ä¸­è¿›è¡ŒäºŒåˆ†æŸ¥æ‰¾ï¼ŒæˆåŠŸæ—¶è¿”å›ç»“ç‚¹çš„ä½ç½®ï¼Œå¤±è´¥æ—¶è¿”å›-1
-    int low=0,high=n-1,mid;     //ç½®å½“å‰æŸ¥æ‰¾åŒºé—´ä¸Šã€ä¸‹ç•Œçš„åˆå€¼
+    //ÔÚÓĞĞò±íR[0..n-1]ÖĞ½øĞĞ¶ş·Ö²éÕÒ£¬³É¹¦Ê±·µ»Ø½áµãµÄÎ»ÖÃ£¬Ê§°ÜÊ±·µ»Ø-1
+    int low=0,high=n-1,mid;     //ÖÃµ±Ç°²éÕÒÇø¼äÉÏ¡¢ÏÂ½çµÄ³õÖµ
     while(low<=high)
     {
         if(R[low].key==K)
             return low;
         if(R[high].key==k)
-            return high;          //å½“å‰æŸ¥æ‰¾åŒºé—´R[low..high]éç©º
+            return high;          //µ±Ç°²éÕÒÇø¼äR[low..high]·Ç¿Õ
         mid=low+((high-low)/2);
-            /*ä½¿ç”¨(low+high)/2ä¼šæœ‰æ•´æ•°æº¢å‡ºçš„é—®é¢˜
-            ï¼ˆé—®é¢˜ä¼šå‡ºç°åœ¨å½“low+highçš„ç»“æœå¤§äºè¡¨è¾¾å¼ç»“æœç±»å‹æ‰€èƒ½è¡¨ç¤ºçš„æœ€å¤§å€¼æ—¶ï¼Œ
-                è¿™æ ·ï¼Œäº§ç”Ÿæº¢å‡ºåå†/2æ˜¯ä¸ä¼šäº§ç”Ÿæ­£ç¡®ç»“æœçš„ï¼Œè€Œlow+((high-low)/2)
-                ä¸å­˜åœ¨è¿™ä¸ªé—®é¢˜*/
+            /*Ê¹ÓÃ(low+high)/2»áÓĞÕûÊıÒç³öµÄÎÊÌâ
+            £¨ÎÊÌâ»á³öÏÖÔÚµ±low+highµÄ½á¹û´óÓÚ±í´ïÊ½½á¹ûÀàĞÍËùÄÜ±íÊ¾µÄ×î´óÖµÊ±£¬
+                ÕâÑù£¬²úÉúÒç³öºóÔÙ/2ÊÇ²»»á²úÉúÕıÈ·½á¹ûµÄ£¬¶ølow+((high-low)/2)
+                ²»´æÔÚÕâ¸öÎÊÌâ*/
         if(R[mid].key==K)
-          return mid;             //æŸ¥æ‰¾æˆåŠŸè¿”å›
+          return mid;             //²éÕÒ³É¹¦·µ»Ø
         if(R[mid].key<K)
-          low=mid+1;              //ç»§ç»­åœ¨R[mid+1..high]ä¸­æŸ¥æ‰¾
+          low=mid+1;              //¼ÌĞøÔÚR[mid+1..high]ÖĞ²éÕÒ
         else
-          high=mid-1;             //ç»§ç»­åœ¨R[low..mid-1]ä¸­æŸ¥æ‰¾
+          high=mid-1;             //¼ÌĞøÔÚR[low..mid-1]ÖĞ²éÕÒ
     }
     if(low>high) {
-        return -1;//å½“low>highæ—¶è¡¨ç¤ºæ‰€æŸ¥æ‰¾åŒºé—´å†…æ²¡æœ‰ç»“æœï¼ŒæŸ¥æ‰¾å¤±è´¥4
+        return -1;//µ±low>highÊ±±íÊ¾Ëù²éÕÒÇø¼äÄÚÃ»ÓĞ½á¹û£¬²éÕÒÊ§°Ü4
     }
 }
 #endif
 
-// ç¬¬äºŒç§
+// µÚ¶şÖÖ
 static int bsearchWithoutRecursion(int array[],int low,int high,int target)
 {
     while(low<=high)
@@ -55,7 +55,7 @@ static int bsearchWithoutRecursion(int array[],int low,int high,int target)
     return-1;
 }
 
-// ç¬¬ä¸‰ç§
+// µÚÈıÖÖ
 static int binSearch(const int *Array,int start,int end,int key)
 {
     int left,right;
@@ -73,20 +73,20 @@ static int binSearch(const int *Array,int start,int end,int key)
     return -1;
 }
 
-// é€’å½’
+// µİ¹é
 static int found(int *arr, int x, int y, int k)
 {
     int m=x+(y-x)/2;
-    if(x>y)//æŸ¥æ‰¾å®Œæ¯•æ²¡æœ‰æ‰¾åˆ°ç­”æ¡ˆï¼Œè¿”å›-1
+    if(x>y)//²éÕÒÍê±ÏÃ»ÓĞÕÒµ½´ğ°¸£¬·µ»Ø-1
         return -1;
     else
     {
         if(arr[m]==k)
-            return m;//æ‰¾åˆ°!è¿”å›ä½ç½®.
+            return m;//ÕÒµ½!·µ»ØÎ»ÖÃ.
         else if(arr[m]>k)
-            return found(arr, x, m-1, k);//æ‰¾å·¦è¾¹
+            return found(arr, x, m-1, k);//ÕÒ×ó±ß
          else
-            return found(arr, m+1, y, k);//æ‰¾å³è¾¹
+            return found(arr, m+1, y, k);//ÕÒÓÒ±ß
     }
 }
 
